@@ -16,6 +16,11 @@ jobs:
       - name: Set Node Version
         uses: actions/setup-node@v2
 
+      - name: Build
+        uses: actions/setup-node@master
+      - run: npm i --prod
+      - run: npm run build
+
       - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest 
         with:
@@ -26,9 +31,8 @@ jobs:
           connect_timeout: 60s
 
           scp: |
-            ./* => /www/chat-bot
+            ./dist/* => /www/chat-bot
 
           last_ssh: |
             cd /www/chat-bot
-            npm i --prod
             pm2 restart all
