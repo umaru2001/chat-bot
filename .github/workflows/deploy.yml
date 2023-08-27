@@ -1,0 +1,34 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Node Version
+        uses: actions/setup-node@v2
+
+      - name: Deploy to Server
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest 
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          user: ${{ secrets.DEPLOY_USERNAME }}
+          pass: ${{ secrets.DEPLOY_PASSWORD }}
+
+          connect_timeout: 60s
+
+          scp: |
+            ./* => /www/chat-bot
+
+          last_ssh: |
+            cd /www/chat-bot
+            npm i --prod
+            pm2 restart all
