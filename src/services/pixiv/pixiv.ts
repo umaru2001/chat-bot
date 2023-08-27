@@ -1,5 +1,5 @@
-import axios, { AxiosResponse } from "axios";
-import { Lolicon } from "./types";
+import axios, { AxiosResponse } from 'axios';
+import { Lolicon } from './types';
 
 // const date = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
@@ -25,11 +25,11 @@ export interface Response<T> {
 const defaultParams: Params = {
   r18: 1,
   num: 1,
-  tag: ["genshin", "genshinImpact", "GenshinImpact"],
-  size: ["original"],
+  tag: ['genshin', 'genshinImpact', 'GenshinImpact'],
+  size: ['original'],
   dsc: false,
   excludeAI: true,
-}
+};
 
 const PIXIV_URL = 'https://api.lolicon.app/setu/v2';
 
@@ -41,7 +41,7 @@ export const getPixivImage = async (params: Params): Promise<Lolicon> => {
   const { data: outerData } = res || {};
   const { data = [] } = outerData || {};
   return data[0];
-}
+};
 
 // const getAxiosConfig = (): AxiosRequestConfig => {
 

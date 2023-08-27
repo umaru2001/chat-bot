@@ -30,7 +30,7 @@ export interface Lolicon {
   uid: number,
   title: string,
   author: string,
-  "r18": false,
+  'r18': false,
   tags: string[],
   ext: number,
   aiType: number,
