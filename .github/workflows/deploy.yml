@@ -13,12 +13,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Build
+      - name: Set Node Version
         uses: actions/setup-node@v2
+
+      - name: Build
         env:
           ROBOT_TOKEN: ${{ secrets.PROD_ROBOT_TOKEN }}
-      - run: npm install
-      - run: npm run build
+        run: | 
+          npm install
+          npm run build
 
       - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest 
