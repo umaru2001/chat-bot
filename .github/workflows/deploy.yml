@@ -29,6 +29,8 @@ jobs:
           user: ${{ secrets.DEPLOY_USERNAME }}
           pass: ${{ secrets.DEPLOY_PASSWORD }}
           connect_timeout: 60s
+          first_ssh: |
+            rm -rf /www/chat-bot
           scp: |
             ./dist/* => /www/chat-bot
           last_ssh: |
