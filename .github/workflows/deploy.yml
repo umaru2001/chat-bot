@@ -20,7 +20,8 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         env:
           ROBOT_TOKEN: ${{ secrets.PROD_ROBOT_TOKEN }}
-          BUILD_SCRIPT: npm install && npm run build
+      - run: npm install
+      - run: npm run build
 
       - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest 
