@@ -28,8 +28,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           user: ${{ secrets.DEPLOY_USERNAME }}
           pass: ${{ secrets.DEPLOY_PASSWORD }}
-
           connect_timeout: 60s
-
           scp: |
             ./dist/* => /www/chat-bot
+          last_ssh: |
