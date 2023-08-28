@@ -3,7 +3,7 @@ import { UserFromGetMe } from '@telegram.ts/types';
 import { getPixivImage } from './services/pixiv/pixiv';
 
 if (!process.env.ROBOT_TOKEN) {
-  console.error('缺少 ROBOT_TOKEN 环境变量。');
+  console.error('缺少 ROBOT_TOKEN 环境变量。请提供有效的 ROBOT_TOKEN 后再运行程序。');
   process.exit(1);
 }
 

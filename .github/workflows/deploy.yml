@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Build
-        uses: JamesIves/github-pages-deploy-action@master
+        uses: JamesIves/github-pages-deploy-action@v4
         env:
           ROBOT_TOKEN: ${{ secrets.PROD_ROBOT_TOKEN }}
           BUILD_SCRIPT: npm install && npm run build
