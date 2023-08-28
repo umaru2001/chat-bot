@@ -18,8 +18,9 @@ jobs:
 
       - name: Build
         uses: actions/setup-node@master
-      - run: npm i
-      - run: npm run build
+        env:
+          ROBOT_TOKEN: ${{ secrets.PROD_ROBOT_TOKEN }}
+          BUILD_SCRIPT: npm install && npm run build
 
       - name: Deploy to Server
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest 
@@ -32,7 +33,3 @@ jobs:
 
           scp: |
             ./dist/* => /www/chat-bot
-
-          last_ssh: |
-            cd /www/chat-bot
-            pm2 restart all

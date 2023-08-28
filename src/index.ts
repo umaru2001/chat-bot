@@ -2,7 +2,7 @@ import { TelegramBot, Context } from 'telegramsjs';
 import { UserFromGetMe } from '@telegram.ts/types';
 import { getPixivImage } from './services/pixiv/pixiv';
 
-const bot = new TelegramBot('6302674654:AAHvQzDRhntKaYES-M9dD6tSS_NfYJEK6C0');
+const bot = new TelegramBot(process.env.ROBOT_TOKEN ?? '');
 
 function isCommand(ctx: Context): boolean {
   return ctx.entities?.[0]?.type === 'bot_command' && ctx.text.at(0) === '/';
