@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Build
-        uses: actions/setup-node@master
+        uses: JamesIves/github-pages-deploy-action@master
         env:
           ROBOT_TOKEN: ${{ secrets.PROD_ROBOT_TOKEN }}
           BUILD_SCRIPT: npm install && npm run build
@@ -29,8 +29,5 @@ jobs:
           user: ${{ secrets.DEPLOY_USERNAME }}
           pass: ${{ secrets.DEPLOY_PASSWORD }}
           connect_timeout: 60s
-          first_ssh: |
-            rm -rf /www/chat-bot
           scp: |
             ./dist/* => /www/chat-bot
-          last_ssh: |
