@@ -2,7 +2,12 @@ import { TelegramBot, Context } from 'telegramsjs';
 import { UserFromGetMe } from '@telegram.ts/types';
 import { getPixivImage } from './services/pixiv/pixiv';
 
-const bot = new TelegramBot(process.env.ROBOT_TOKEN ?? '');
+if (!process.env.ROBOT_TOKEN) {
+  console.error('缺少 ROBOT_TOKEN 环境变量。请提供有效的 ROBOT_TOKEN 后再运行程序。');
+  process.exit(1);
+}
+
+const bot = new TelegramBot(process.env.ROBOT_TOKEN);
 
 function isCommand(ctx: Context): boolean {
   return ctx.entities?.[0]?.type === 'bot_command' && ctx.text.at(0) === '/';
