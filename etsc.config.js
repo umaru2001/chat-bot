@@ -7,6 +7,7 @@ module.exports = {
     define: {
       'process.env.NODE_ENV': '"production"',
       'process.env.ROBOT_TOKEN': JSON.stringify(process.env.ROBOT_TOKEN),
+    },
     plugins: [
       {
         name: 'externalize-node-modules',
