@@ -57,7 +57,7 @@ bot.command('start', (ctx: Context) => {
   const username = ctx.from.username
     ? `@${ctx.from.username}`
     : ctx.from.first_name;
-  ctx.replyWithMarkdown(`${username}, *thanks for using telegramsjs ❤️*`);
+  ctx.replyWithMarkdown(`${username}, *thanks for using this robot ❤️*`);
 });
 
 // bot.command('echo', (ctx: Context) => {
