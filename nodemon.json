@@ -1,7 +1,7 @@
 {
-  "watch": ["src"],
+  "watch": ["src", "build"],
   "ignore": ["src/**/*.test.ts"],
   "ext": "ts,mjs,js,json,graphql",
-  "exec": "etsc && ts-node ./src/index.ts",
+  "exec": "etsc --config=build/etsc.config.dev.js && node ./dist/index.js",
   "legacyWatch": true
 }

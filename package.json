@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
-    "build": "rm -rf ./dist && etsc --config=etsc.config.js",
+    "build": "rm -rf ./dist && etsc --config=build/etsc.config.pro.js",
     "start": "node ./dist/index.js",
     "lint": "eslint ./src --fix"
   },
@@ -28,7 +28,6 @@
     "install": "^0.13.0",
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.1",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }

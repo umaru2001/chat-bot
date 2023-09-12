@@ -8,7 +8,7 @@ export interface Params {
   num?:	number,         // 一次返回的结果数量，范围为1到20；在指定关键字或标签的情况下，结果数量可能会不足指定的数量
   uid?: number[],		      // 返回指定uid作者的作品，最多20个
   keyword?: string,		// 返回从标题、作者、标签中按指定关键字模糊匹配的结果，大小写不敏感，性能和准度较差且功能单一，建议使用tag代替
-  tag?: string[],		  // 返回匹配指定标签的作品，详见下文
+  tag?: string[] | string,		  // 返回匹配指定标签的作品，详见下文
   size?: string[],	  // ["original"]	返回指定图片规格的地址，详见下文
   proxy?:	string,	    // i.pixiv.re	设置图片地址所使用的在线反代服务，详见下文
   dateAfter?: number,		  // 返回在这个时间及以后上传的作品；时间戳，单位为毫秒
@@ -25,16 +25,24 @@ export interface Response<T> {
 const defaultParams: Params = {
   r18: 1,
   num: 1,
-  tag: ['genshin', 'genshinImpact', 'GenshinImpact'],
+  tag: ['genshin', 'genshinImpact', 'GenshinImpact', 'honkai', 'Honkai: Star Rail'],
   size: ['original'],
   dsc: false,
   excludeAI: true,
 };
 
+const processParams = (params: Params): Params => {
+  const { tag } = params;
+  if (typeof tag === 'string') {
+    return params;
+  }
+  return Object.assign(params, { tag: tag?.join('|') ?? '' });
+};
+
 const PIXIV_URL = 'https://api.lolicon.app/setu/v2';
 
 export const getPixivImage = async (params: Params): Promise<Lolicon> => {
-  const innerParams = Object.assign(defaultParams, params);
+  const innerParams = processParams(Object.assign(defaultParams, params));
   const res: AxiosResponse<Response<Lolicon>> = await axios.get<Response<Lolicon>>(PIXIV_URL, {
     params: innerParams,
   });

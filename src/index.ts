@@ -34,7 +34,7 @@ bot.on('ready', async (client: UserFromGetMe) => {
       },
       {
         command: '/echo',
-        description: 'return your ctx!',
+        description: 'return the text you send!',
       },
     ],
   });
@@ -42,16 +42,16 @@ bot.on('ready', async (client: UserFromGetMe) => {
   console.log(`Starting ${client.username}`);
 });
 
-bot.use({});
+// bot.use({});
 
-bot.on('message', (ctx: Context) => {
-  if (isCommand(ctx)) return;
-  bot.session.counter = bot.session.counter || 0;
-  bot.session.counter++;
-  ctx.replyWithMarkdownV2(
-    `Counter updated, new value: \`${bot.session.counter}\``,
-  );
-});
+// bot.on('message', (ctx: Context) => {
+//   if (isCommand(ctx)) return;
+//   bot.session.counter = bot.session.counter || 0;
+//   bot.session.counter++;
+//   ctx.replyWithMarkdownV2(
+//     `Counter updated, new value: \`${bot.session.counter}\``,
+//   );
+// });
 
 bot.command('start', (ctx: Context) => {
   const username = ctx.from.username
@@ -60,10 +60,10 @@ bot.command('start', (ctx: Context) => {
   ctx.replyWithMarkdown(`${username}, *thanks for using this robot ❤️*`);
 });
 
-// bot.command('echo', (ctx: Context) => {
-//   const {} = ctx;
-//   ctx.replyWithMarkdown(`${username}, *thanks for using telegramsjs ❤️*`);
-// });
+bot.command('echo', (ctx: Context) => {
+  const { text } = ctx;
+  ctx.reply((text as string).substring(5).trimStart());
+});
 
 bot.command('test', (ctx: Context) => {
   console.log(ctx);
@@ -75,25 +75,23 @@ bot.command('setu', async (ctx: Context) => {
   const { title, author, urls } = pixivImg || {};
   const { original } = urls || {};
   ctx.reply(`${original}
-  title: ${title}
-  author: ${author}
+title: ${title}
+author: ${author}
   `);
 });
 
-bot.command('remove', (ctx: Context) => {
-  ctx.replyWithMarkdownV2(
-    `Removing session from database: \`${bot.session.counter}\``,
-  );
-  bot.session = null;
-});
+// bot.command('remove', (ctx: Context) => {
+//   ctx.replyWithMarkdownV2(
+//     `Removing session from database: \`${bot.session.counter}\``,
+//   );
+//   bot.session = null;
+// });
 
 bot.command('status', (ctx: Context) => {
   const username = ctx.from.username
     ? `@${ctx.from.username}`
     : ctx.from.first_name;
-  ctx.replyWithMarkdownV2(
-    `Database has \`${bot.session?.counter ?? 0}\` messages from ${username}`,
-  );
+  ctx.replyWithMarkdown(`${username}, *thanks for using this robot ❤️*`);
 });
 
 bot.login();

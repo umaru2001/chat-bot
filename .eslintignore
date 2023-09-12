@@ -2,4 +2,6 @@ dev/
 dist/
 lib/
 sample/
+build/
 etsc.config.js
+local.config.js
